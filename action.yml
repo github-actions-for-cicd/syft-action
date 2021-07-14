@@ -37,6 +37,7 @@ runs:
           SCOPE=""
         else
           SCOPE="--scope ${{ inputs.scope }}"
+        fi
         ./syft ${{ inputs.directory-path }} $FORMAT
         pwd
       shell: bash
