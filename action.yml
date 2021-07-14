@@ -28,10 +28,10 @@ runs:
       run: |
         set -u
         set +e
-        if [ -z ${{ inputs.format }} ]; then
+        if [ -z ${{ inputs.output-format }} ]; then
           FORMAT="-o text"
         else
-          FORMAT="-o ${{ inputs.format }}"
+          FORMAT="-o ${{ inputs.output-format }}"
         fi
         if [ -z ${{ inputs.scope }} ]; then
           SCOPE=""
