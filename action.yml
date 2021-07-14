@@ -38,6 +38,7 @@ runs:
         else
           SCOPE="--scope ${{ inputs.scope }}"
         ./bin/syft ${{ inputs.directory-path }} $FORMAT
-        
+        pwd
+      shell: bash
       
   
