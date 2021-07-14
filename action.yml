@@ -16,7 +16,7 @@ inputs:
     default: 'text'
   scope:
     description: 'the scope of the SBOM. For all image layers, set to "all-layers".'
-     required: false
+    required: false
 runs:    
   using: "composite"
   steps:
