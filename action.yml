@@ -1,0 +1,43 @@
+name: 'syft-sbom-generator'
+description: 'Scan and generate SBOM for directory or image'
+branding:
+  icon: 'check-circle'
+  color: 'green'
+inputs:
+  directory-path:
+    description: 'path to the directory or image to scan'
+    required: true
+  config: 
+    description: 'path to the config file for syft'
+    required: false
+  output-format:
+    description: 'the format for the generated sbom (json, text, cyclonedx, spdx, spdx-json, table)'
+    required: false
+    default: 'text'
+  scope:
+    description: 'the scope of the SBOM. For all image layers, set to "all-layers".'
+     required: false
+runs:    
+  using: "composite"
+  steps:
+    - name: Download latest syft version
+      run: |
+        curl --silent --show-error -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /bin
+      shell: bash
+    - name: Generate SBOM
+      run: |
+        set -u
+        set +e
+        if [ -z ${{ inputs.format }} ]; then
+          FORMAT="-o text"
+        else
+          FORMAT="-o ${{ inputs.format }}"
+        fi
+        if [ -z ${{ inputs.scope }} ]; then
+          SCOPE=""
+        else
+          SCOPE="--scope ${{ inputs.scope }}"
+        ./bin/syft ${{ inputs.directory-path }} $FORMAT
+        
+      
+  
