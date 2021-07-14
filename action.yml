@@ -38,7 +38,7 @@ runs:
         else
           SCOPE="--scope ${{ inputs.scope }}"
         fi
-        ./syft ${{ inputs.directory-path }} $FORMAT
+        ./syft ${{ inputs.directory-path }} $FORMAT | tee -a sbom.json
         pwd
       shell: bash
       
