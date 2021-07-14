@@ -22,7 +22,7 @@ runs:
   steps:
     - name: Download latest syft version
       run: |
-        curl --silent --show-error -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b
+        curl --silent --show-error -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b ./
       shell: bash
     - name: Generate SBOM
       run: |
@@ -37,7 +37,7 @@ runs:
           SCOPE=""
         else
           SCOPE="--scope ${{ inputs.scope }}"
-        .syft ${{ inputs.directory-path }} $FORMAT
+        ./syft ${{ inputs.directory-path }} $FORMAT
         pwd
       shell: bash
       
